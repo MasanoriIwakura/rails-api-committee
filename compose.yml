@@ -1,0 +1,15 @@
+services:
+  api:
+    build:
+      context: ./api
+    volumes:
+      - ./api/:/api
+  db:
+    image: postgresql:16.0
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=password
+
+volumes:
+  pg-data:
