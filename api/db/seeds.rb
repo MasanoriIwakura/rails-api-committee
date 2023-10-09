@@ -8,6 +8,7 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+Faker::Config.locale = :ja
 10.times do |n|
   Company.create!(
     name: Faker::Company.name,
