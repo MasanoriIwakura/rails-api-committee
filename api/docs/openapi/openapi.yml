@@ -36,6 +36,10 @@ components:
           format: int64
         name:
           type: string
+          # 以下は型が異なる場合にCommitteeがエラーになるサンプル
+          # type: integer
+        zip_code:
+          type: string
         address:
           type: string
         created_at:
@@ -44,3 +48,11 @@ components:
         updated_at:
           type: string
           format: date-time
+      required:
+        - id
+        - name
+        # 以下は必須項目でCommitteeがエラーになるサンプル
+        # - zip_code
+        - address
+        - created_at
+        - updated_at
