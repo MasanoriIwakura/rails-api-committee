@@ -1,6 +1,6 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
-ENV['RAILS_ENV'] ||= 'test'
+ENV['RAILS_ENV'] = 'test'
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
@@ -60,4 +60,16 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  config.before(:suite) do
+    system('bin/rails db:seed RAILS_ENV=test')
+  end
+
+  # Committee configuration
+  config.include Committee::Rails::Test::Methods
+  config.add_setting :committee_options
+  config.committee_options = {
+    schema_path: Rails.root.join('docs', 'openapi', 'openapi.yml').to_s,
+    prefix: '/api/v1'
+  }
 end
