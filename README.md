@@ -19,9 +19,9 @@ This repository is Ruby on Rails and Committee sandbox.
 docker compose up
 
 # Access to
-localhost:3000
+localhost:3030
 ```
 
 ## API
 
-Comming soon...
+Coming soon...
