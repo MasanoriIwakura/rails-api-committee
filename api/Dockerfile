@@ -50,14 +50,13 @@ RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y curl libvips postgresql-client && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
-# Copy built artifacts: gems, application
-COPY --from=build /usr/local/bundle /usr/local/bundle
-COPY --from=build /rails /rails
-
 # Run and own only the runtime files as a non-root user for security
-RUN useradd rails --create-home --shell /bin/bash && \
-    chown -R rails:rails db log storage tmp
+RUN useradd rails --create-home --shell /bin/bash
 USER rails:rails
+
+# Copy built artifacts: gems, application
+COPY --from=build --chown=rails:rails /usr/local/bundle /usr/local/bundle
+COPY --from=build --chown=rails:rails /rails /rails
 
 # Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
