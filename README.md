@@ -22,6 +22,13 @@ docker compose up
 localhost:3030
 ```
 
+## Testing
+
+```sh
+docker compose exec api bash
+$ bin/rails rspec
+```
+
 ## API
 
 Coming soon...
